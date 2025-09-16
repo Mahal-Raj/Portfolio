@@ -22,6 +22,7 @@ Phone: +1-437-556-3743
 Email: mahalraj0001@gmail.com
 LinkedIn: https://www.linkedin.com/in/sukhraj-singh
 GitHub: https://github.com/Mahal-Raj
+Website: https://sukhrajsingh.com
 
 Education:
 Bachelor of Computer Science (Current)

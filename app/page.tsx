@@ -22,12 +22,12 @@ export default function Home() {
       <Education />
       <Certificates />
       <Contact />
-      {/* Footer with theme refresh message */}
-      <footer className="py-6 px-4 text-center border-t border-border/50">
-        <p className="text-sm text-muted-foreground">
+
+      <div className="fixed bottom-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-t border-border/50 py-2 px-4">
+        <p className="text-sm text-center text-muted-foreground">
           Don't like the color palette? Just refresh the page until you find one you love! 🎨
         </p>
-      </footer>
+      </div>
     </main>
   )
 }
