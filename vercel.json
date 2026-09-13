@@ -1,5 +1,3 @@
 {
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "echo 'Publishing verified editorial portfolio'",
-  "outputDirectory": "."
+  "$schema": "https://openapi.vercel.sh/vercel.json"
 }
