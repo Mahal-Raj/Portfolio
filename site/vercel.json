@@ -1,0 +1,15 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "https://v0-portfolio-with-p2t4apc87-sukhna-9511s-projects.vercel.app/"
+    },
+    {
+      "source": "/:path*",
+      "destination": "https://v0-portfolio-with-p2t4apc87-sukhna-9511s-projects.vercel.app/:path*"
+    }
+  ]
+}
