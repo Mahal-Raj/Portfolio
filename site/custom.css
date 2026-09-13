@@ -1,0 +1,107 @@
+/* Static-source recovery layer for the verified editorial deployment. */
+html[data-static-page] [style*="opacity:0"] {
+  opacity: 1 !important;
+  filter: none !important;
+  transform: none !important;
+}
+
+.project-poster-art {
+  position: relative;
+  min-height: 330px;
+  overflow: hidden;
+  background: #0a0c0f;
+}
+
+.project-poster-art img {
+  width: 100%;
+  height: 100%;
+  min-height: 330px;
+  object-fit: cover;
+  opacity: .88;
+  filter: saturate(.82) contrast(1.03);
+}
+
+.project-poster-art::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 38%, rgba(10, 12, 15, .78));
+}
+
+.project-poster-art .art-label,
+.project-poster-status {
+  position: absolute;
+  z-index: 1;
+}
+
+.project-poster-art .art-label {
+  top: 22px;
+  left: 22px;
+  color: #fff;
+}
+
+.project-poster-status {
+  left: 22px;
+  right: 22px;
+  bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  color: #fff;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: .7rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.static-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: none;
+  padding: 110px max(24px, 7vw) 40px;
+  background: #0a0c0f;
+  color: #f3f3ef;
+}
+
+.static-menu.is-open { display: block; }
+.static-menu nav { display: grid; gap: 12px; }
+.static-menu a {
+  color: inherit;
+  font-size: clamp(2.2rem, 7vw, 5.8rem);
+  line-height: .95;
+  text-decoration: none;
+}
+
+.static-menu-close {
+  position: absolute;
+  top: 28px;
+  right: max(24px, 7vw);
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.case-video {
+  width: 100%;
+  display: block;
+  background: #0a0c0f;
+  border-radius: 2px;
+}
+
+.case-section-grid {
+  display: grid;
+  grid-template-columns: minmax(180px, .7fr) minmax(0, 1.6fr);
+  gap: clamp(28px, 8vw, 120px);
+}
+
+.case-section-grid h2 { margin: 0; }
+.case-section-grid p { margin-top: 0; }
+
+@media (max-width: 760px) {
+  .project-poster-art,
+  .project-poster-art img { min-height: 245px; }
+  .case-section-grid { grid-template-columns: 1fr; gap: 20px; }
+}

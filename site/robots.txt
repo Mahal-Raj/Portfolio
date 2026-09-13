@@ -1,0 +1,5 @@
+User-Agent: *
+Allow: /
+
+Host: https://portfolio-singhsukhraj.vercel.app
+Sitemap: https://portfolio-singhsukhraj.vercel.app/sitemap.xml
