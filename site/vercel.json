@@ -2,12 +2,42 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "node build-exact.mjs",
   "outputDirectory": "dist",
-  "cleanUrls": true,
-  "trailingSlash": false,
   "rewrites": [
     {
       "source": "/_next/image",
       "destination": "https://v0-portfolio-with-p2t4apc87-sukhna-9511s-projects.vercel.app/_next/image"
+    },
+    {
+      "source": "/about",
+      "destination": "/about.html"
+    },
+    {
+      "source": "/experience",
+      "destination": "/experience.html"
+    },
+    {
+      "source": "/skills",
+      "destination": "/skills.html"
+    },
+    {
+      "source": "/education",
+      "destination": "/education.html"
+    },
+    {
+      "source": "/beyond",
+      "destination": "/beyond.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/contact.html"
+    },
+    {
+      "source": "/projects",
+      "destination": "/projects.html"
+    },
+    {
+      "source": "/projects/:slug",
+      "destination": "/projects/:slug.html"
     }
   ]
 }
