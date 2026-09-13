@@ -1,39 +1,32 @@
-import { cp, mkdir, readdir, rm } from "node:fs/promises";
-import { basename } from "node:path";
+import { cp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 
 const source = new URL(".", import.meta.url);
 const output = new URL("./dist/", source);
 
 await rm(output, { recursive: true, force: true });
-await mkdir(output, { recursive: true });
+await mkdir(new URL("./dist/projects/", source), { recursive: true });
+await mkdir(new URL("./dist/portfolio-addon/assets/chunks/", source), { recursive: true });
+await mkdir(new URL("./dist/portfolio-addon/assets/fonts/", source), { recursive: true });
+await mkdir(new URL("./dist/portfolio-addon/images/projects/", source), { recursive: true });
 
-for (const name of ["images", "video"]) {
-  await cp(new URL(`./${name}/`, source), new URL(`./dist/${name}/`, source), { recursive: true });
+await cp(new URL("./_next/static/immutable/chunks/", source), new URL("./dist/portfolio-addon/assets/chunks/", source), { recursive: true });
+await cp(new URL("./_next/static/immutable/media/", source), new URL("./dist/portfolio-addon/assets/fonts/", source), { recursive: true });
+await cp(new URL("./images/projects/", source), new URL("./dist/portfolio-addon/images/projects/", source), { recursive: true });
+
+for (const name of ["custom.css", "static.js"]) {
+  await cp(new URL(`./${name}`, source), new URL(`./dist/portfolio-addon/${name}`, source));
 }
 
-await mkdir(new URL("./dist/assets/chunks/", source), { recursive: true });
-await mkdir(new URL("./dist/assets/fonts/", source), { recursive: true });
-await cp(new URL("./_next/static/immutable/chunks/", source), new URL("./dist/assets/chunks/", source), { recursive: true });
-await cp(new URL("./_next/static/immutable/media/", source), new URL("./dist/assets/fonts/", source), { recursive: true });
+let projects = await readFile(new URL("./projects.html", source), "utf8");
+projects = projects
+  .replaceAll('href="/assets/', 'href="/portfolio-addon/assets/')
+  .replaceAll('href="/custom.css"', 'href="/portfolio-addon/custom.css"')
+  .replaceAll('src="/static.js"', 'src="/portfolio-addon/static.js"')
+  .replaceAll('src="/images/projects/', 'src="/portfolio-addon/images/projects/')
+  .replace(/\s*<a class="arrow-link" href="\/projects\/deployguard-cloud-platform">View case study →<\/a>/, "")
+  .replace(/\s*<a class="arrow-link" href="\/projects\/deployguard-cloud-platform#demo">Watch demo →<\/a>/, "")
+  .replace(/\s*<a class="arrow-link" href="\/projects\/signaldesk-ai">View case study →<\/a>/, "")
+  .replace(/\s*<a class="arrow-link" href="\/projects\/signaldesk-ai#demo">Watch demo →<\/a>/, "")
+  .replaceAll("working system / recorded demo", "project overview / source code");
 
-for (const name of ["custom.css", "static.js", "icon.svg", "robots.txt", "sitemap.xml"]) {
-  await cp(new URL(`./${name}`, source), new URL(`./dist/${name}`, source));
-}
-
-for (const entry of await readdir(source, { withFileTypes: true })) {
-  if (!entry.isFile() || !entry.name.endsWith(".html")) continue;
-  if (entry.name === "index.html") {
-    await cp(new URL("./index.html", source), new URL("./dist/index.html", source));
-    continue;
-  }
-  const route = basename(entry.name, ".html");
-  await mkdir(new URL(`./dist/${route}/`, source), { recursive: true });
-  await cp(new URL(`./${entry.name}`, source), new URL(`./dist/${route}/index.html`, source));
-}
-
-for (const entry of await readdir(new URL("./projects/", source), { withFileTypes: true })) {
-  if (!entry.isFile() || !entry.name.endsWith(".html")) continue;
-  const route = basename(entry.name, ".html");
-  await mkdir(new URL(`./dist/projects/${route}/`, source), { recursive: true });
-  await cp(new URL(`./projects/${entry.name}`, source), new URL(`./dist/projects/${route}/index.html`, source));
-}
+await writeFile(new URL("./dist/projects/index.html", source), projects);
