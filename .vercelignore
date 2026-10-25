@@ -1,0 +1,6 @@
+output/
+scripts/
+*.tsbuildinfo
+.env*
+AGENTS.md
+CLAUDE.md

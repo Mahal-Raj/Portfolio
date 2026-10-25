@@ -9,6 +9,10 @@
 
 # production
 /build
+/dist/
+
+# local previews, recordings and backup artifacts
+/output/
 
 # debug
 npm-debug.log*
