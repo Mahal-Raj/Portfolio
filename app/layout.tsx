@@ -5,6 +5,7 @@ import { GeistMono } from "geist/font/mono"
 import { Analytics } from "@vercel/analytics/next"
 import { SiteHeader } from "@/components/layout/site-header"
 import { SiteFooter } from "@/components/layout/site-footer"
+import { PortfolioHelp } from "@/components/help/portfolio-help"
 import { siteConfig, socialLinks } from "@/data/site"
 import "./globals.css"
 
@@ -51,6 +52,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
         <SiteHeader />
         <main id="main-content">{children}</main>
         <SiteFooter />
+        <PortfolioHelp />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }} />
         {process.env.VERCEL ? <Analytics /> : null}
       </body>

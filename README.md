@@ -25,6 +25,7 @@ Open [http://localhost:3000](http://localhost:3000).
 ```bash
 corepack pnpm lint
 corepack pnpm typecheck
+corepack pnpm test
 corepack pnpm build
 ```
 
@@ -41,6 +42,8 @@ public/       Optimized images and intro media
 ## Updating content
 
 - Edit personal links and site metadata in `data/site.ts`.
+- The bottom-left portfolio guide answers in the visitor's browser using `data/guide.ts` and the project catalogue. Keep résumé facts in sync with `public/Sukhraj-Singh-Resume.pdf`; differing dates are identified explicitly rather than silently reconciled. Unknown questions point visitors to direct contact. Chat messages are not sent to an AI service or saved across reloads.
+- The homepage encouragement card uses original messages in `data/encouragement.ts`. Append new messages to keep existing IDs stable. A browser-local history prevents repeats until the set is exhausted, including across refreshes; after that, a new cycle starts without repeating the previous message. Separate visitors have independently randomized sequences.
 - Add or update project case studies in `data/projects.ts`; the `/projects/[slug]` pages are generated from this file.
 - Runnable-project demos are configured beside their case-study data. Store real local-execution H.264 MP4 recordings in `public/video/` and matching WebP posters in `public/images/projects/`. Research or design-only entries should not be presented as working demos until executable source is available.
 - `scripts/generate-project-demos.mjs` rebuilds the motion walkthroughs when `PORTFOLIO_VIDEO_TOOLING_ROOT` points to a tooling folder containing `sharp` and `ffmpeg-static`.
